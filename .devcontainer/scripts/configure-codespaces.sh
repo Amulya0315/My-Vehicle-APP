@@ -24,9 +24,4 @@ if [ "${CODESPACES}" = "true" ]; then
     sudo pkill dockerd && sudo pkill containerd
     /usr/local/share/docker-init.sh
 
-    # Remove the default credential helper
-    sudo sed -i -E 's/helper =.*//' /etc/gitconfig
-
-    # Add one that just uses secrets available in the Codespace
-    git config --global credential.helper '!f() { sleep 1; echo "username=${GITHUB_USER}"; echo "password=${MY_GH_TOKEN}"; }; f'
 fi
